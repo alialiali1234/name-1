@@ -1,5 +1,10 @@
 <?php
-define('BOT_TOKEN', '**TOKEN**');
+define('BOT_TOKEN', 'Done! Congratulations on your new bot. You will find it at t.me/nohevmarsiesarabot. You can now add a description, about section and profile picture for your bot, see /help for a list of commands. By the way, when you've finished creating your cool bot, ping our Bot Support if you want a better username for it. Just make sure the bot is fully operational before you do this.
+
+Use this token to access the HTTP API:
+350746022:AAGJ-O4AaWh2jrOrwOxLRKbjRQKGZahT-CE
+
+For a description of the Bot API, see this page: https://core.telegram.org/bots/api;
 define('API_URL', 'https://api.telegram.org/bot'.BOT_TOKEN.'/');
 
 function apiRequestWebhook($method, $parameters) {
@@ -98,24 +103,19 @@ function apiRequestJson($method, $parameters) {
   } else if (!is_array($parameters)) {
     error_log("Parameters must be an array\n");
     return false;
-  }
-
   $parameters["method"] = $method;
-
   $handle = curl_init(API_URL);
   curl_setopt($handle, CURLOPT_RETURNTRANSFER, true);
   curl_setopt($handle, CURLOPT_CONNECTTIMEOUT, 5);
   curl_setopt($handle, CURLOPT_TIMEOUT, 60);
   curl_setopt($handle, CURLOPT_POSTFIELDS, json_encode($parameters));
   curl_setopt($handle, CURLOPT_HTTPHEADER, array("Content-Type: application/json"));
-
   return exec_curl_request($handle);
-}
 function processMessage($message) {
   // process incoming message
   $boolean = file_get_contents('booleans.txt');
   $booleans= explode("\n",$boolean);
-  $admin = **ADMIN**;
+  $admin = 73429098
   $message_id = $message['message_id'];
   $rpto = $message['reply_to_message']['forward_from']['id'];
   $chat_id = $message['chat']['id'];
